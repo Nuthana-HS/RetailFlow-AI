@@ -153,20 +153,24 @@ def create_app() -> FastAPI:
     # -------------------------------------------------------------------------
     # Routers
     # -------------------------------------------------------------------------
-    # NOTE: Routers are registered in Phase 3 (Auth), 4 (Stores), etc.
-    # They are imported here to maintain the app factory pattern.
-    # Uncomment as each phase is completed:
+    # Routers are registered here as each phase completes.
+    # Phase 3: Auth ✅
+    from app.api.v1.auth.router import router as auth_router
 
-    # from app.api.v1.auth.router import router as auth_router
+    app.include_router(auth_router, prefix="/api/v1/auth", tags=["Authentication"])
+
+    # Phase 4: Store Management (registered in Phase 4)
     # from app.api.v1.stores.router import router as stores_router
+    # app.include_router(stores_router, prefix="/api/v1/stores", tags=["Stores"])
+
+    # Phase 5: Queue Engine (registered in Phase 5)
     # from app.api.v1.queues.router import router as queues_router
+    # app.include_router(queues_router, prefix="/api/v1/queues", tags=["Queue Engine"])
+
+    # Phase 6+: Analytics, Notifications, WebSocket
     # from app.api.v1.analytics.router import router as analytics_router
     # from app.api.v1.notifications.router import router as notifications_router
     # from app.websocket.router import router as ws_router
-
-    # app.include_router(auth_router, prefix="/api/v1/auth", tags=["Authentication"])
-    # app.include_router(stores_router, prefix="/api/v1/stores", tags=["Stores"])
-    # app.include_router(queues_router, prefix="/api/v1/queues", tags=["Queue Engine"])
     # app.include_router(analytics_router, prefix="/api/v1/analytics", tags=["Analytics"])
     # app.include_router(notifications_router, prefix="/api/v1/notifications", tags=["Notifications"])
     # app.include_router(ws_router, tags=["WebSocket"])
