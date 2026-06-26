@@ -1,0 +1,218 @@
+# =============================================================================
+# RetailFlow AI — Comprehensive .gitignore
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Environment Variables (CRITICAL — never commit these)
+# -----------------------------------------------------------------------------
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+*.env
+
+# -----------------------------------------------------------------------------
+# Python
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+coverage/
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pyright/
+
+# Linting
+.ruff_cache/
+
+# Distribution
+*.whl
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# -----------------------------------------------------------------------------
+# Node.js / Next.js
+# -----------------------------------------------------------------------------
+node_modules/
+.npm
+.eslintcache
+.stylelintcache
+
+# Next.js build output
+.next/
+out/
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Testing
+coverage/
+.nyc_output
+
+# Package locks (keep package-lock.json, ignore yarn.lock if using npm)
+yarn.lock
+
+# Storybook
+storybook-static/
+
+# -----------------------------------------------------------------------------
+# Docker
+# -----------------------------------------------------------------------------
+# Don't ignore docker-compose.yml — it's needed
+# But ignore any local override files
+docker-compose.override.yml
+docker-compose.local.yml
+
+# -----------------------------------------------------------------------------
+# AI/ML
+# -----------------------------------------------------------------------------
+# Model weights (large binary files — use Git LFS or store separately)
+*.pt
+*.pth
+*.pkl
+*.joblib
+*.h5
+*.onnx
+
+# Training artifacts
+runs/
+lightning_logs/
+wandb/
+mlruns/
+
+# Dataset files
+*.csv.gz
+data/raw/
+data/processed/
+
+# But keep the models directory structure
+!ai-service/models/.gitkeep
+
+# -----------------------------------------------------------------------------
+# IDEs & Editors
+# -----------------------------------------------------------------------------
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json.example
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# JetBrains
+*.iml
+*.iws
+.idea/
+
+# -----------------------------------------------------------------------------
+# OS Files
+# -----------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# -----------------------------------------------------------------------------
+# Logs
+# -----------------------------------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# -----------------------------------------------------------------------------
+# Database
+# -----------------------------------------------------------------------------
+*.sqlite3
+*.db
+*.sqlite
+
+# PostgreSQL dumps
+*.dump
+*.sql.gz
+
+# -----------------------------------------------------------------------------
+# Certificates & Keys
+# -----------------------------------------------------------------------------
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+
+# -----------------------------------------------------------------------------
+# Temporary Files
+# -----------------------------------------------------------------------------
+tmp/
+temp/
+.temp/
+*.tmp
+*.bak
+*.backup
+
+# -----------------------------------------------------------------------------
+# Documentation Build
+# -----------------------------------------------------------------------------
+docs/_build/
+docs/site/
+site/

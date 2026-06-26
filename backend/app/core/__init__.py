@@ -1,0 +1,1 @@
+"""RetailFlow AI — Core package."""

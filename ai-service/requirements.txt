@@ -1,0 +1,30 @@
+# =============================================================================
+# RetailFlow AI — AI Service Dependencies
+# =============================================================================
+
+# Web framework
+fastapi==0.115.0
+uvicorn[standard]==0.31.1
+
+# Computer Vision
+ultralytics==8.3.0              # YOLOv8 (includes torch dependency)
+opencv-python-headless==4.10.0.84  # OpenCV without GUI deps (for server)
+Pillow==10.4.0
+
+# Machine Learning
+xgboost==2.1.2
+scikit-learn==1.5.2
+numpy==2.1.3
+pandas==2.2.3
+joblib==1.4.2                   # Model serialization
+
+# HTTP client (push updates to Core API)
+httpx==0.27.2
+
+# Data validation
+pydantic==2.9.2
+pydantic-settings==2.5.2
+
+# Utilities
+python-dateutil==2.9.0
+structlog==24.4.0
