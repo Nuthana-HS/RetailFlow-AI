@@ -166,13 +166,9 @@ def create_app() -> FastAPI:
     from app.api.v1.queues.router import router as queues_router
     app.include_router(queues_router, prefix="/api/v1/queues", tags=["Queue Engine"])
 
-    # Phase 6+: Analytics, Notifications, WebSocket
-    # from app.api.v1.analytics.router import router as analytics_router
-    # from app.api.v1.notifications.router import router as notifications_router
-    # from app.websocket.router import router as ws_router
-    # app.include_router(analytics_router, prefix="/api/v1/analytics", tags=["Analytics"])
-    # app.include_router(notifications_router, prefix="/api/v1/notifications", tags=["Notifications"])
-    # app.include_router(ws_router, tags=["WebSocket"])
+    # Phase 6: Analytics ✅
+    from app.api.v1.analytics.router import router as analytics_router
+    app.include_router(analytics_router, prefix="/api/v1/analytics", tags=["Analytics"])
 
     # -------------------------------------------------------------------------
     # Health Check Endpoint
