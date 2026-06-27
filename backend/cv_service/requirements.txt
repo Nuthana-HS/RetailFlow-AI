@@ -1,0 +1,16 @@
+# RetailFlow AI — CV Service Dependencies
+#
+# Install with:
+#   pip install -r cv_service/requirements.txt
+#
+# For GPU acceleration (NVIDIA CUDA 11.8+):
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+#   pip install ultralytics
+
+# Core CV
+ultralytics>=8.0.0          # YOLOv8 — person detection
+opencv-python-headless>=4.8 # Video capture (headless = no GUI dependencies)
+numpy>=1.24                 # Frame array manipulation
+
+# HTTP client (Queue Engine updates)
+httpx[asyncio]>=0.27        # Async HTTP with connection pooling

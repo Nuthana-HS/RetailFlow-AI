@@ -174,6 +174,10 @@ def create_app() -> FastAPI:
     from app.websocket.router import router as ws_router
     app.include_router(ws_router, prefix="/ws", tags=["WebSocket"])
 
+    # Phase 8: Computer Vision / Camera Zones ✅
+    from app.api.v1.cameras.router import router as cameras_router
+    app.include_router(cameras_router, prefix="/api/v1/cameras", tags=["Camera Zones"])
+
     # -------------------------------------------------------------------------
     # Health Check Endpoint
     # -------------------------------------------------------------------------
