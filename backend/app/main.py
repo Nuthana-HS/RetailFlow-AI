@@ -170,23 +170,30 @@ def create_app() -> FastAPI:
     from app.api.v1.analytics.router import router as analytics_router
     app.include_router(analytics_router, prefix="/api/v1/analytics", tags=["Analytics"])
 
+    # Phase 7: WebSocket Real-Time ✅
+    from app.websocket.router import router as ws_router
+    app.include_router(ws_router, prefix="/ws", tags=["WebSocket"])
+
     # -------------------------------------------------------------------------
     # Health Check Endpoint
     # -------------------------------------------------------------------------
 
     @app.get("/health", tags=["System"], summary="Health check")
-    async def health_check() -> dict[str, str]:
+    async def health_check() -> dict:
         """
         Health check endpoint for load balancers and monitoring.
 
         Returns:
-            JSON with status, version, and environment.
+            JSON with status, version, environment, and WebSocket connection stats.
         """
+        from app.websocket.connection_manager import connection_manager
+
         return {
             "status": "healthy",
             "version": settings.APP_VERSION,
             "environment": settings.ENVIRONMENT,
             "service": "retailflow-ai-backend",
+            "websocket": connection_manager.stats,
         }
 
     return app
