@@ -178,6 +178,10 @@ def create_app() -> FastAPI:
     from app.api.v1.cameras.router import router as cameras_router
     app.include_router(cameras_router, prefix="/api/v1/cameras", tags=["Camera Zones"])
 
+    # Phase 9: ML Prediction (XGBoost EWT) ✅
+    from app.api.v1.ml.router import router as ml_router
+    app.include_router(ml_router, prefix="/api/v1/ml", tags=["ML Prediction"])
+
     # -------------------------------------------------------------------------
     # Health Check Endpoint
     # -------------------------------------------------------------------------

@@ -1,0 +1,9 @@
+# RetailFlow AI — ML Service Dependencies
+#
+# Install with:
+#   pip install -r ml_service/requirements.txt
+
+xgboost>=2.0.0          # Gradient-boosted tree regressor
+scikit-learn>=1.3.0     # Metrics: MAE, RMSE, R²
+pandas>=2.0.0           # Feature DataFrame construction
+numpy>=1.24.0           # Array operations, clamping
