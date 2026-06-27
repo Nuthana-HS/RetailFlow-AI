@@ -162,9 +162,9 @@ def create_app() -> FastAPI:
     from app.api.v1.stores.router import router as stores_router
     app.include_router(stores_router, prefix="/api/v1/stores", tags=["Store Management"])
 
-    # Phase 5: Queue Engine (registered in Phase 5)
-    # from app.api.v1.queues.router import router as queues_router
-    # app.include_router(queues_router, prefix="/api/v1/queues", tags=["Queue Engine"])
+    # Phase 5: Queue Engine ✅
+    from app.api.v1.queues.router import router as queues_router
+    app.include_router(queues_router, prefix="/api/v1/queues", tags=["Queue Engine"])
 
     # Phase 6+: Analytics, Notifications, WebSocket
     # from app.api.v1.analytics.router import router as analytics_router
