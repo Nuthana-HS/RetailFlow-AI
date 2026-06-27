@@ -156,12 +156,11 @@ def create_app() -> FastAPI:
     # Routers are registered here as each phase completes.
     # Phase 3: Auth ✅
     from app.api.v1.auth.router import router as auth_router
-
     app.include_router(auth_router, prefix="/api/v1/auth", tags=["Authentication"])
 
-    # Phase 4: Store Management (registered in Phase 4)
-    # from app.api.v1.stores.router import router as stores_router
-    # app.include_router(stores_router, prefix="/api/v1/stores", tags=["Stores"])
+    # Phase 4: Store Management ✅
+    from app.api.v1.stores.router import router as stores_router
+    app.include_router(stores_router, prefix="/api/v1/stores", tags=["Store Management"])
 
     # Phase 5: Queue Engine (registered in Phase 5)
     # from app.api.v1.queues.router import router as queues_router

@@ -33,7 +33,7 @@ from app.core.config import settings  # noqa: E402
 
 # Import models (add new model files here as they're created)
 from app.models.user import User, RefreshToken  # noqa: F401, E402
-# from app.models.store import Store, Counter, StoreManager  # Phase 4
+from app.models.store import Store, Counter, StoreManager  # noqa: F401, E402  — Phase 4
 # from app.models.queue import QueueSnapshot, AlertConfig   # Phase 5
 # from app.models.notification import Notification          # Phase 10
 
