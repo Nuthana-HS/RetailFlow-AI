@@ -36,7 +36,9 @@ from app.models.user import User, RefreshToken  # noqa: F401, E402
 from app.models.store import Store, Counter, StoreManager  # noqa: F401, E402  — Phase 4
 from app.models.queue import QueueSnapshot, AlertConfig  # noqa: F401, E402  — Phase 5
 from app.models.camera import CameraZone  # noqa: F401, E402  — Phase 8
-# from app.models.notification import Notification          # Phase 10
+from app.models.notification import Notification  # noqa: F401, E402  — Phase 10
+# from app.models.analytics import ...                  # Phase 11
+
 
 # Target metadata for autogenerate
 target_metadata = Base.metadata

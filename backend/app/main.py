@@ -182,6 +182,10 @@ def create_app() -> FastAPI:
     from app.api.v1.ml.router import router as ml_router
     app.include_router(ml_router, prefix="/api/v1/ml", tags=["ML Prediction"])
 
+    # Phase 10: Notifications ✅
+    from app.api.v1.notifications.router import router as notifications_router
+    app.include_router(notifications_router, prefix="/api/v1/notifications", tags=["Notifications"])
+
     # -------------------------------------------------------------------------
     # Health Check Endpoint
     # -------------------------------------------------------------------------

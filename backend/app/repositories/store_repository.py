@@ -253,6 +253,15 @@ class StoreRepository:
         )
         return result.scalars().all()
 
+    # Alias used by NotificationService (Phase 10)
+    async def get_managers_for_store(
+        self,
+        db: AsyncSession,
+        store_id: uuid.UUID,
+    ) -> Sequence[User]:
+        """Alias for get_store_managers — used by NotificationService."""
+        return await self.get_store_managers(db, store_id)
+
     async def get_counter_stats(
         self,
         db: AsyncSession,

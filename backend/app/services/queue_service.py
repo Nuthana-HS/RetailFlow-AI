@@ -478,7 +478,26 @@ class QueueService:
                     current_value=queue_length
                     if config.alert_type == AlertType.QUEUE_LENGTH
                     else wait_seconds,
-                    # Phase 10: trigger email/push notification here
+                )
+
+                # Phase 10: Deliver in-app + email notifications
+                from app.services.notification_service import notification_service
+                from app.repositories.counter_repository import CounterRepository
+
+                counter = await CounterRepository().get_by_id(db, counter_id)
+                counter_number = counter.counter_number if counter else None
+                trigger_val = (
+                    queue_length if config.alert_type == AlertType.QUEUE_LENGTH
+                    else (wait_seconds or 0)
+                )
+
+                await notification_service.handle_triggered_alert(
+                    db=db,
+                    config=config,
+                    store_id=store_id,
+                    counter_id=counter_id,
+                    counter_number=counter_number,
+                    trigger_value=trigger_val,
                 )
 
 
