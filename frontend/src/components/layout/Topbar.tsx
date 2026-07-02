@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
+import { NotificationBell } from "./NotificationBell"
+
 export function Topbar() {
   const { user, logout } = useAuth()
 
@@ -32,6 +34,8 @@ export function Topbar() {
         </div>
 
         <div className="flex items-center gap-x-4 lg:gap-x-6">
+          <NotificationBell />
+          
           {/* User Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
