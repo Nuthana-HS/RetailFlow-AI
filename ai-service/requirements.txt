@@ -1,30 +1,44 @@
 # =============================================================================
 # RetailFlow AI — AI Service Dependencies
 # =============================================================================
+# Python 3.12+  |  Audited: 2026-07-02
+#
+# Audit notes vs. original:
+#   REMOVED python-dateutil — never imported in ai-service code
+#   REMOVED httpx           — no outbound HTTP calls in current ai-service code
+#   NOTE: ultralytics, opencv-python-headless, Pillow, xgboost, scikit-learn,
+#         numpy, pandas, and joblib are marked as Phase 8/9 dependencies.
+#         They are not currently imported (CV/ML routes are TODO stubs) but are
+#         kept here because the Dockerfile pre-downloads YOLOv8 weights and the
+#         service is designed to load these models on startup in Phase 8/9.
+#
+# Versions: pinned to the same releases used in backend/ venv where possible.
+# =============================================================================
 
 # Web framework
-fastapi==0.115.0
-uvicorn[standard]==0.31.1
-
-# Computer Vision
-ultralytics==8.3.0              # YOLOv8 (includes torch dependency)
-opencv-python-headless==4.10.0.84  # OpenCV without GUI deps (for server)
-Pillow==10.4.0
-
-# Machine Learning
-xgboost==2.1.2
-scikit-learn==1.5.2
-numpy==2.1.3
-pandas==2.2.3
-joblib==1.4.2                   # Model serialization
-
-# HTTP client (push updates to Core API)
-httpx==0.27.2
+fastapi==0.139.0
+uvicorn[standard]==0.34.3
 
 # Data validation
-pydantic==2.9.2
-pydantic-settings==2.5.2
+pydantic==2.13.4
+pydantic-settings==2.14.2
 
-# Utilities
-python-dateutil==2.9.0
-structlog==24.4.0
+# Logging
+structlog==26.1.0
+
+# ---------------------------------------------------------------------------
+# Phase 8: Computer Vision (YOLOv8 person detection)
+# Dockerfile pre-downloads yolov8n.pt at build time — keep these here.
+# ---------------------------------------------------------------------------
+ultralytics==8.3.0                  # YOLOv8 (pulls torch as a dependency)
+opencv-python-headless==4.10.0.84   # OpenCV without GUI deps (server-safe)
+Pillow==10.4.0                      # Image I/O (ultralytics dependency)
+
+# ---------------------------------------------------------------------------
+# Phase 9: Machine Learning (XGBoost EWT predictor)
+# ---------------------------------------------------------------------------
+xgboost==2.1.2
+scikit-learn==1.9.0
+numpy==2.5.0
+pandas==3.0.3
+joblib==1.5.3                       # Model serialisation

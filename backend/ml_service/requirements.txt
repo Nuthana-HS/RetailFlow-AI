@@ -1,9 +1,18 @@
+# =============================================================================
 # RetailFlow AI — ML Service Dependencies
+# =============================================================================
+# Audited: 2026-07-02
+#
+# These are the ML-specific packages used directly by backend/ml_service/.
+# In normal operation the ml_service runs inside the backend process, so
+# these packages are also listed in backend/requirements.txt.
+# This file exists for standalone training scripts / CI ML jobs.
 #
 # Install with:
-#   pip install -r ml_service/requirements.txt
+#   pip install -r backend/ml_service/requirements.txt
+# =============================================================================
 
-xgboost>=2.0.0          # Gradient-boosted tree regressor
-scikit-learn>=1.3.0     # Metrics: MAE, RMSE, R²
-pandas>=2.0.0           # Feature DataFrame construction
-numpy>=1.24.0           # Array operations, clamping
+xgboost==2.1.2          # Gradient-boosted tree regressor (XGBRegressor)
+scikit-learn==1.9.0     # Metrics: MAE (mean_absolute_error), RMSE, R²
+pandas==3.0.3           # Feature DataFrame construction
+numpy==2.5.0            # Array operations, sqrt, clamping

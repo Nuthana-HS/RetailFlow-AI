@@ -1,46 +1,55 @@
 # =============================================================================
 # RetailFlow AI — Backend Dependencies (Production)
 # =============================================================================
+# Python 3.12+  |  Audited: 2026-07-02
+#
+# Audit notes (removed vs. original):
+#   REMOVED aiosmtplib  — notification_service.py uses stdlib smtplib directly
+#   REMOVED jinja2      — email HTML is built as inline f-strings, no templates
+#   REMOVED python-dateutil — never imported; stdlib datetime/timezone used only
+#   REMOVED pytz           — never imported; stdlib timezone.utc used throughout
+#
+# Versions marked [installed] are pinned to the exact version in the project
+# venv (Python 3.14.5).  Versions marked [stable] are not yet installed in the
+# venv; they are the latest stable release compatible with Python 3.12+ and the
+# rest of the dependency tree.
+# =============================================================================
 
 # Web framework
-fastapi==0.115.0
-uvicorn[standard]==0.31.1
-gunicorn==23.0.0
+fastapi==0.139.0                    # [installed]
+uvicorn[standard]==0.34.3           # [stable] — latest stable before 0.35+
+gunicorn==23.0.0                    # [stable] — production process manager
 
 # Database (async SQLAlchemy)
-sqlalchemy[asyncio]==2.0.36
-asyncpg==0.29.0                    # Async PostgreSQL driver
-alembic==1.13.3
+sqlalchemy[asyncio]==2.0.51         # [installed]
+asyncpg==0.30.0                     # [stable] — async PostgreSQL driver
+alembic==1.13.3                     # [stable] — schema migrations
 
 # Data validation
-pydantic==2.9.2
-pydantic-settings==2.5.2
-email-validator==2.2.0
+pydantic==2.13.4                    # [installed]
+pydantic-settings==2.14.2           # [installed]
+email-validator==2.3.0              # [installed] — required by pydantic EmailStr
 
 # Authentication
-python-jose[cryptography]==3.3.0   # JWT encoding/decoding
-passlib[bcrypt]==1.7.4             # Password hashing
-python-multipart==0.0.12           # Form data parsing
+python-jose[cryptography]==3.5.0    # [installed] — JWT encoding/decoding
+passlib[bcrypt]==1.7.4              # [installed] — password hashing
+python-multipart==0.0.32            # [installed] — form data / file upload
 
 # Redis (async)
-redis[asyncio]==5.1.1
+redis[asyncio]==8.0.1               # [installed]
 
-# HTTP client (for AI service calls)
-httpx==0.27.2
+# HTTP client (AI service calls + cv_service queue updates)
+httpx==0.28.1                       # [installed]
 
 # Rate limiting
-slowapi==0.1.9
+slowapi==0.1.10                     # [installed]
 
-# CORS
-# (included with fastapi)
-
-# Utilities
-python-dateutil==2.9.0
-pytz==2024.2
+# Machine Learning (XGBoost EWT predictor — ml_service/)
+xgboost==2.1.2                      # [stable] — not yet installed in venv
+scikit-learn==1.9.0                 # [installed]
+numpy==2.5.0                        # [installed]
+pandas==3.0.3                       # [installed]
+joblib==1.5.3                       # [installed] — model serialisation
 
 # Logging
-structlog==24.4.0
-
-# Email
-aiosmtplib==3.0.2
-jinja2==3.1.4                      # Email templates
+structlog==26.1.0                   # [installed]
