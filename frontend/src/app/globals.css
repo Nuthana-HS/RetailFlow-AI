@@ -1,0 +1,232 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Google Font ───────────────────────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap");
+
+/* ─── CSS Custom Properties (Design Tokens) ────────────────────────────────── */
+@layer base {
+  :root {
+    /* Background scale */
+    --background: 220 20% 97%;
+    --foreground: 222 47% 11%;
+
+    /* Card / surface */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Brand primary — deep blue */
+    --primary: 224 76% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary — slate */
+    --secondary: 220 14% 90%;
+    --secondary-foreground: 222 47% 20%;
+
+    /* Muted */
+    --muted: 220 14% 93%;
+    --muted-foreground: 220 9% 46%;
+
+    /* Accent — teal */
+    --accent: 175 60% 40%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Status */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 222 47% 11%;
+
+    /* Queue status colours */
+    --queue-low: 142 71% 45%;
+    --queue-med: 38 92% 50%;
+    --queue-high: 0 84% 60%;
+
+    /* UI chrome */
+    --border: 220 13% 88%;
+    --input: 220 13% 88%;
+    --ring: 224 76% 48%;
+
+    /* Radius */
+    --radius: 0.625rem;
+
+    /* Sidebar */
+    --sidebar: 222 47% 11%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-accent: 224 76% 55%;
+    --sidebar-border: 222 40% 18%;
+  }
+
+  .dark {
+    --background: 222 47% 7%;
+    --foreground: 210 40% 95%;
+
+    --card: 222 40% 11%;
+    --card-foreground: 210 40% 95%;
+    --popover: 222 40% 11%;
+    --popover-foreground: 210 40% 95%;
+
+    --primary: 224 76% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 222 40% 18%;
+    --secondary-foreground: 210 40% 85%;
+
+    --muted: 222 40% 15%;
+    --muted-foreground: 220 13% 55%;
+
+    --accent: 175 55% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 60% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 85% 48%;
+    --warning-foreground: 0 0% 100%;
+
+    --queue-low: 142 60% 40%;
+    --queue-med: 38 85% 48%;
+    --queue-high: 0 72% 51%;
+
+    --border: 222 40% 20%;
+    --input: 222 40% 20%;
+    --ring: 224 76% 60%;
+
+    --sidebar: 222 47% 9%;
+    --sidebar-foreground: 210 40% 88%;
+    --sidebar-accent: 224 76% 58%;
+    --sidebar-border: 222 40% 16%;
+  }
+}
+
+/* ─── Base element styles ───────────────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar (webkit) */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/30;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+}
+
+/* ─── Utility classes ───────────────────────────────────────────────────────── */
+@layer utilities {
+  /* Typography */
+  .font-sans {
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .font-mono {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  /* Glass morphism card effect */
+  .glass {
+    @apply bg-card/80 backdrop-blur-md border border-border/50;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+
+  /* Queue status utilities */
+  .queue-low {
+    color: hsl(var(--queue-low));
+  }
+  .queue-med {
+    color: hsl(var(--queue-med));
+  }
+  .queue-high {
+    color: hsl(var(--queue-high));
+  }
+  .bg-queue-low {
+    background-color: hsl(var(--queue-low));
+  }
+  .bg-queue-med {
+    background-color: hsl(var(--queue-med));
+  }
+  .bg-queue-high {
+    background-color: hsl(var(--queue-high));
+  }
+
+  /* Live indicator pulse */
+  .live-pulse {
+    animation: live-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Fade-in animation */
+  .fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+
+  /* Slide-up animation */
+  .slide-up {
+    animation: slide-up 0.35s ease-out;
+  }
+
+  /* Number counter flip animation */
+  .counter-flip {
+    animation: counter-flip 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+}
+
+/* ─── Keyframes ─────────────────────────────────────────────────────────────── */
+@layer base {
+  @keyframes live-pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(1.15);
+    }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes counter-flip {
+    0%   { opacity: 0; transform: translateY(-4px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0)   scale(1); }
+  }
+}
