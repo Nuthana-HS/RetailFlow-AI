@@ -3,23 +3,36 @@
  * Wraps all manager/admin pages with the sidebar + topbar shell.
  * Session hydration happens here.
  */
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Dashboard",
-};
+import { useSessionHydration, useAuth } from "@/hooks/useAuth";
+import { DashboardShell } from "@/components/layout/DashboardShell";
+import { Loader2 } from "lucide-react";
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="flex min-h-screen bg-background">
-      {/* Sidebar + Topbar will be added in Milestone 2 */}
-      <main className="flex-1 overflow-auto">
-        {children}
-      </main>
-    </div>
-  );
+  // Attempt to restore session on mount
+  useSessionHydration();
+  
+  const { isLoading, isAuthenticated } = useAuth();
+
+  // Show a full screen loading state while checking auth
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  // If not authenticated, the middleware/hook will redirect. 
+  // We return null to avoid flashing protected content.
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  return <DashboardShell>{children}</DashboardShell>;
 }
